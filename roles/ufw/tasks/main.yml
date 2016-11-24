@@ -16,18 +16,6 @@
   register: command_result
   changed_when: "'Rules updated' in command_result.stdout"
 
-- name: Allow mongo traffic from mongo1
-  become: yes
-  command: /usr/sbin/ufw allow in on eth1 from {{urls.mongo1}} to any port 27017
-  register: command_result
-  changed_when: "'Rules updated' in command_result.stdout"
-
-- name: Allow mongo traffic from mongo2
-  become: yes
-  command: /usr/sbin/ufw allow in on eth1 from {{urls.mongo2}} to any port 27017
-  register: command_result
-  changed_when: "'Rules updated' in command_result.stdout"
-
 - name: Enable ufw
   become: yes
   command: /usr/sbin/ufw --force enable
