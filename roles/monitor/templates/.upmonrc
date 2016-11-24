@@ -17,9 +17,9 @@
   "sms": {
     // SMS provider config
     "messagebird": {
-      "accessKey": "{{secrets.upmon.sms.accessKey}}",
-      "originator": "{{secrets.upmon.sms.originator}}",
-      "recipients": "{{secrets.upmon.sms.recipients}}"
+      "accessKey": "{{secrets.upmon.sms.messagebird.accessKey}}",
+      "originator": "{{secrets.upmon.sms.messagebird.originator}}",
+      "recipients": "{{secrets.upmon.sms.messagebird.recipients}}"
     }
   },
   "graf": {
