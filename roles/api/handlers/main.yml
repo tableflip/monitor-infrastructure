@@ -1,0 +1,7 @@
+- name: Restart kudoshealth-api
+  become: yes
+  service: name={{service}} state=restarted
+
+- name: Restart Nginx
+  become: yes
+  service: name=nginx state=restarted

@@ -1,0 +1,6 @@
+[app]
+monitor.tableflip.io
+
+# See: `group_vars/production.yaml` for group specific vars
+[production]
+monitor.tableflip.io

@@ -1,0 +1,33 @@
+{
+  "port": 4000,
+  "mongo": "mongodb://localhost/kudoshealth",
+  "frontendUrl": "{{scheme}}://{{urls.frontend}}",
+  "uploadcare": {
+    "publicKey": "{{secrets.uploadcare.publicKey}}",
+    "secretKey": "{{secrets.uploadcare.secretKey}}"
+  },
+  "jwt": {
+    "secret": "{{secrets.api.jwt}}",
+    "algorithm": "HS256"
+  },
+  "auth": {
+    "secret": "{{secrets.api.auth}}",
+    "algorithm": "aes-256-ctr"
+  },
+  "intervalSize": 900000,
+  "email": {
+    "defaultFrom": "{{defaultFrom}}",
+    "transport": {
+      "service":  "Mailgun",
+      "auth": {
+        "user": "{{secrets[inventory_hostname].mailgun.user}}",
+        "pass": "{{secrets[inventory_hostname].mailgun.pass}}"
+      }
+    }
+  },
+  "cron": {
+    "daily": "0 12 * * Monday,Tuesday,Wednesday,Thursday,Friday",
+    "weekly": "0 10 * * Friday",
+    "alternateWeekDays": "1 10 * * Tuesday,Thursday"
+  }
+}

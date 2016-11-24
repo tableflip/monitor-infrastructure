@@ -1,0 +1,54 @@
+# install {{service}}/{{service}} e.g /home/kudoshealth-api/kudoshealth-api
+
+- name: Ensure system groups exists
+  become: yes
+  group: name={{service}} state=present
+
+- name: Ensure system user exists
+  become: yes
+  user: name={{service}} group={{service}}
+
+- name: Create /home/{{service}}/.ssh
+  become: yes
+  become_user: "{{service}}"
+  file: path=/home/{{service}}/.ssh state=directory
+
+- name: Copy ssh deploy key
+  become: yes
+  become_user: "{{service}}"
+  copy: content="{{keys[service]}}" dest=/home/{{service}}/.ssh/id_rsa owner={{service}} mode=0400 force=yes
+
+- name: Clone repo
+  become: yes
+  become_user: "{{service}}"
+  git: update=yes version=HEAD repo=ssh://git@github.com/{{repo}}.git dest=/home/{{service}}/src
+  notify:
+    - Restart {{service}}
+
+- name: Install libkrb5-dev for bcrypt dependency
+  become: yes
+  apt:
+    name: "libkrb5-dev"
+    state: present
+
+- name: npm install
+  shell: npm install chdir=/home/{{service}}/src
+  become: yes
+  become_user: "{{service}}"
+  notify:
+    - Restart {{service}}
+
+- name: Copy app config
+  become: yes
+  become_user: "{{service}}"
+  template: src=config/production.json dest=/home/{{service}}/src/config/production.json
+  notify:
+    - Restart {{service}}
+
+- name: Copy Upstart config
+  become: yes
+  template: src=upstart/upstart.conf dest=/etc/init/{{service}}.conf mode=0644 force=yes
+
+- name: Ensure api is running
+  become: yes
+  service: name={{service}} state=started enabled=yes
