@@ -2,7 +2,7 @@
 Description=Job that runs the {{service}} service
 
 [Service]
-Type=forking
+Type=simple
 WorkingDirectory=/home/{{service}}/current/src
 ExecStart=/usr/bin/npm start
 Restart=always

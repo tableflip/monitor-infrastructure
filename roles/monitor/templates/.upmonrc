@@ -1,6 +1,6 @@
 {
   "ping": {
-    "interval": 5000,
+    "interval": 60000,
     "services": {{ secrets.upmon.ping.services | to_json }}
   },
   "mail": {
