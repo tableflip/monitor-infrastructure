@@ -19,7 +19,7 @@
 - name: Clone the project to the new release folder
   become: yes
   become_user: "{{service}}"
-  git: dest={{ deploy_helper.new_release_path }}/src repo=ssh://git@github.com/{{repo}}.git version=HEAD depth=1 update=yes force=yes
+  git: dest={{ deploy_helper.new_release_path }}/src repo=https://github.com/{{repo}}.git version=HEAD depth=1 update=yes force=yes
 
 - name: Add an unfinished file, to allow cleanup on successful finalize
   become: yes
