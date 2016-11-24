@@ -67,7 +67,7 @@ When we need to scale the infrastructure we can add additional hosts to an inven
 - Install VirtualBox
 - Install Vagrant (`brew install vagrant`)
 - Install Ansible
-- You will need the vault password. Talk to your friendly neighborhood tableflipper.
+- You will need the vault password. Talk to your friendly neighbourhood tableflipper.
 
 ## Usage
 
@@ -80,7 +80,7 @@ When we need to scale the infrastructure we can add additional hosts to an inven
 vagrant up
 
 # Update vm with our roles
-ansible-playbook -i dev playbook.yml --ask-vault-pass
+ansible-playbook -i dev deploy.yml
 ```
 
 You now have a test vm, running locally
@@ -92,10 +92,10 @@ You now have a test vm, running locally
 
 ```sh
 # bootstrap ansible user
-ansible-playbook -i production bootstrap.yml --ask-vault-pass --extra-vars "ansible_user=root"
+ansible-playbook -i production bootstrap.yml --extra-vars "ansible_user=root"
 
 # Intall app and dependencies
-ansible-playbook -i production deploy.yml --ask-vault-pass
+ansible-playbook -i production deploy.yml
 ```
 
 ## Secrets - Ansible Vault
